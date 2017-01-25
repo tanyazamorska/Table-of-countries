@@ -106,11 +106,15 @@ function addEditListener() {
     $('.edit').on('click', function() {
         var newValue = prompt("Enter a new value", "");
         var indexTr = $(this).parent('td').parent('tr').index();
-        countries[indexTr-1]; // obj
+        //countries[indexTr-1]; // obj
         var keys = Object.keys(countries[indexTr-1]); // keys in obj
         var index = $(this).parent().index();
         var value = keys[index - 1]; // key
-        countries[indexTr-1][value] = newValue;
+        if (!!(newValue)) {
+            countries[indexTr-1][value] = newValue;
+        } else {
+            countries[indexTr-1][value];
+        }
         refresh();
     });
 }
