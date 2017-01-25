@@ -1,0 +1,15 @@
+img {
+    height: 35px;
+    width: 40px;
+}
+
+th, td {
+    width: 15px;
+    text-align: center;
+}
+#content {
+    margin: 25px;
+}
+.edit {
+    float: right;
+}

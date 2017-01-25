@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Countries</title>
+    <script src="jquery-3.1.1.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/paper.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <form class="form-horizontal">
+        <fieldset>
+            <legend>Add Country</legend>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Name</label>
+                <div class="col-lg-8">
+                    <input id="addName" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Capital</label>
+                <div class="col-lg-8">
+                    <input id="addCapital" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Currency</label>
+                <div class="col-lg-8">
+                    <input id="addCurrency" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Flag</label>
+                <div class="col-lg-8">
+                    <input id="addFlag" type="text">
+                </div>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox"> Visited
+                </label>
+                <div class="col-lg-3"></div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Priority to visit</label>
+                <div class="col-lg-8">
+                    <input id="addPriority" type="number">
+                </div>
+            </div>
+            <div class="button">
+                <button id="add" class="btn btn-primary btn-md" disabled="disabled">add</button>
+                <div class="col-lg-3"></div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+<script src="main.js"></script>
+
+</body>
+</html>
