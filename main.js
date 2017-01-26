@@ -56,12 +56,12 @@ function createAndFillTable() {
         var num = i + 1;
         $('table tr:last-child').after('<tr>' +
             '<td>' + num +'</td>'+
-            '<td>' +item.name+' <button type="button" class="btn btn-default btn-xs edit">edit</button>' +'</td>' +
-            '<td>' +item.capital+' <button type="button" class="btn btn-default btn-xs edit">edit</button>'+'</td>' +
-            '<td>' +item.currency+' <button type="button" class="btn btn-default btn-xs edit">edit</button>'+'</td>' +
-            '<td><img src='+item.flag +'>' +' <button type="button" class="btn btn-default btn-xs edit">edit</button>'+'</td>' +
-            '<td>' +item.isVisited+' <button type="button" class="btn btn-default btn-xs edit">edit</button>'+'</td>' +
-            '<td>' +item.priorityToVisit+' <button type="button" class="btn btn-default btn-xs edit">edit</button>'+'</td>' +
+            '<td>' +item.name+ '</td>' +
+            '<td>' +item.capital+ '</td>' +
+            '<td>' +item.currency+ '</td>' +
+            '<td><img src='+item.flag +'></td>' +
+            '<td>' +item.isVisited+'</td>' +
+            '<td>' +item.priorityToVisit+'</td>' +
             '<td><button type="button" class="btn btn-danger btn-xs remove">remove</button></td></tr>');
     });
 }
@@ -71,7 +71,7 @@ function refresh() {
      $('#content').remove();
      createAndFillTable();
      addRemoveListener();
-     addEditListener();
+     addTextListener();
 }
 
 // додаємо об`єкт до масиву
@@ -102,20 +102,31 @@ function addRemoveListener() {
 }
 
 // змінюємо об`єкти в масиві
-function addEditListener() {
-    $('.edit').on('click', function() {
-        var newValue = prompt("Enter a new value", "");
-        var indexTr = $(this).parent('td').parent('tr').index();
+function addTextListener() {
+    $('td').on('click', function () {
+        var indexTr = $(this).parent('tr').index();
         //countries[indexTr-1]; // obj
-        var keys = Object.keys(countries[indexTr-1]); // keys in obj
-        var index = $(this).parent().index();
+        var keys = Object.keys(countries[indexTr - 1]); // keys in obj
+        var index = $(this).index();
         var value = keys[index - 1]; // key
-        if (!!(newValue)) {
-            countries[indexTr-1][value] = newValue;
-        } else {
-            countries[indexTr-1][value];
-        }
-        refresh();
+
+        var td = $(this).html('<input type="text" class="form-control" value=' + countries[indexTr - 1][value] + '>');
+        var input = $('.form-control:text');
+        $(input).focus();
+        $(input).focusout(function () {
+            var newVal = $(input).val();
+            countries[indexTr - 1][value] = newVal;
+            refresh();
+        });
+
+        // альтернативний шлях відпрацьовує enter
+        $(input).keyup(function(event) {
+            if (event.keyCode === 13) {
+                var newVal = $(input).val();
+                countries[indexTr - 1][value] = newVal;
+                refresh();
+            }
+        });
     });
 }
 
