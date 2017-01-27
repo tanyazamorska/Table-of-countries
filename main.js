@@ -113,10 +113,36 @@ function addTextListener() {
         var td = $(this).html('<input type="text" class="form-control" value=' + countries[indexTr - 1][value] + '>');
         var input = $('.form-control:text');
         $(input).focus();
-        $(input).focusout(function () {
+
+        // переміщення курсору
+        $(input).on('click', function(event) {
+            event.stopPropagation();
+        });
+
+        $(input).focusout(function (event) {
+            event.preventDefault();
             var newVal = $(input).val();
             countries[indexTr - 1][value] = newVal;
             refresh();
+        });
+
+        $(input).keyup(function(event) {
+            if (event.keyCode === 27) {
+                refresh();
+            }
+        });
+
+        $(input).keydown(function(event) {
+
+                if (event.keyCode === 9) {
+                    event.preventDefault();
+                    var newVal = $(input).val();
+                    countries[indexTr - 1][value] = newVal;
+
+                    var tds = $(this).parent('td').siblings();
+                    var nextTd = $(tds[index]).html('<input type="text" class="form-control" value=' + countries[indexTr - 1][keys[index]] + '>');
+                    var newInput = $(nextTd).next('.form-control');
+                }
         });
 
         // альтернативний шлях відпрацьовує enter
