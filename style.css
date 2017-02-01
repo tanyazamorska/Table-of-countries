@@ -10,3 +10,6 @@ th, td {
 #content {
     margin: 25px;
 }
+li {
+    list-style-type: none; /* Убираем маркеры */
+}

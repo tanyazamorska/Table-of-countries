@@ -43,12 +43,12 @@ function createAndFillTable() {
         '</table>');
 
     $('#header').append('<th>#</th>' +
-        '<th>Name</th>' +
-        '<th>Capital</th>' +
-        '<th>Currency</th>' +
+        '<th id="country">Country</th>' +
+        '<th id="capital">Capital</th>' +
+        '<th id="currency">Currency</th>' +
         '<th>Flag</th>' +
-        '<th>Visited</th>' +
-        '<th>Priority to visit</th>' +
+        '<th id="visited">Visited</th>' +
+        '<th id="priority">Priority to visit</th>' +
         '<th>Actions</th></div>');
 
     // заповнюємо таблицю
@@ -72,6 +72,7 @@ function refresh() {
      createAndFillTable();
      addRemoveListener();
      addTextListener();
+     addSortListener();
 }
 
 // додаємо об`єкт до масиву
@@ -91,6 +92,88 @@ $('#add').on('click', function(event) {
     $("input").val('');
     $('input[type="checkbox"]').prop('checked', false);
 });
+
+// сортировка
+var flag = true;
+
+function addSortListener() {
+  $('#country').on('click', function () {
+      flag = !flag;
+    if (!flag) {
+      var sortCounty = _.sortBy(countries, ['countries', 'name']);
+      countries = sortCounty;
+      refresh();
+      $('#country').html('Country' + '<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>');
+    } else {
+      var reverseCounty = _.reverse(countries);
+      countries = reverseCounty;
+      refresh();
+      $('#country').html('Country' + '<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>');
+    }
+  });
+
+  $('#capital').on('click', function () {
+    flag = !flag;
+    if (!flag) {
+      var sortCapital = _.sortBy(countries, ['countries', 'capital']);
+      countries = sortCapital;
+      refresh();
+      $('#capital').html('Capital' + '<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>');
+    } else {
+      var reverseCapital = _.reverse(countries);
+      countries = reverseCapital;
+      refresh();
+      $('#capital').html('Capital' + '<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>');
+    }
+  });
+
+  $('#currency').on('click', function () {
+    flag = !flag;
+    if (!flag) {
+      var sortCurrency = _.sortBy(countries, ['countries', 'currency']);
+      countries = sortCurrency;
+      refresh();
+      $('#currency').html('Currency' + '<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>');
+    } else {
+      var reverseCurrency = _.reverse(countries);
+      countries = reverseCurrency;
+      refresh();
+      $('#currency').html('Currency' + '<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>');
+    }
+  });
+
+  $('#visited').on('click', function () {
+    flag = !flag;
+    if (!flag) {
+      var sortVisited = _.sortBy(countries, ['countries', 'isVisited']);
+      countries = sortVisited;
+      refresh();
+      $('#visited').html('Visited' + '<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>');
+    } else {
+      var reverseVisited = _.reverse(countries);
+      countries = reverseVisited;
+      refresh();
+      $('#visited').html('Visited' + '<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>');
+    }
+  });
+
+  $('#priority').on('click', function () {
+    flag = !flag;
+    if (!flag) {
+      var sortPriority = _.sortBy(countries, ['countries', 'priorityToVisit']);
+      countries = sortPriority;
+      refresh();
+      $('#priority').html('Priority to visit' + '<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>');
+    } else {
+      var reversePriority = _.reverse(countries);
+      countries = reversePriority;
+      refresh();
+      $('#priority').html('Priority to visit' + '<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>');
+    }
+  });
+}
+
+
 
 // видаляємо об`єкт із масиву
 function addRemoveListener() {
@@ -135,13 +218,7 @@ function addTextListener() {
         $(input).keydown(function(event) {
 
                 if (event.keyCode === 9) {
-                    event.preventDefault();
-                    var newVal = $(input).val();
-                    countries[indexTr - 1][value] = newVal;
-
-                    var tds = $(this).parent('td').siblings();
-                    var nextTd = $(tds[index]).html('<input type="text" class="form-control" value=' + countries[indexTr - 1][keys[index]] + '>');
-                    var newInput = $(nextTd).next('.form-control');
+                ////////////////////////////////
                 }
         });
 
@@ -168,5 +245,6 @@ $('form').change(function() {
         $('#add').attr('disabled', 'disabled');
     }
 });
+
 
 
